@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="conduit_commons",
-    version="1.38.10",
+    version="1.38.11",
     description="Common utilities for conduithealth.com",
     url="http://github.com/conduithealth/conduit-commons",
     author="Conduit Healthcare",
@@ -19,7 +19,7 @@ setup(
         "auth0-python==4.2.0",
         "pydantic==1.10.9",
         "redis[hiredis]==4.5.5",
-        "conduit-auth==0.4.1",
+        "conduit-auth==0.4.2",
         "motor==3.1.1",
         "cryptography==41.0.6",
         "pytest==7.3.2",
