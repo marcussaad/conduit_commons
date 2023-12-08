@@ -1,0 +1,48 @@
+name: Continuous Integration
+on:
+  pull_request:
+jobs:
+  test_coverage:
+    name: "Pytest and Coverage"
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up dependencies
+        run: ./setup.sh
+        shell: bash
+      - name: Run unittests
+        run: |
+          . ~/.venvs/conduit-commons/bin/activate
+          pytest
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-xml-coverage-path: ./coverage.xml
+          title: "Unit Test Coverage Report"
+          remove-link-from-badge: true
+
+  version_bump:
+    name: "Check for version bump"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+
+      - name: Did you bump the version?
+        if: contains(steps.changed-files.outputs.all_changed_files, 'setup.py') == false
+        run: |
+          echo "Please remember to bump the version in setup.py"
+          exit 1

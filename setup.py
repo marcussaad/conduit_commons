@@ -1,0 +1,31 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="conduit_commons",
+    version="1.38.10",
+    description="Common utilities for conduithealth.com",
+    url="http://github.com/conduithealth/conduit-commons",
+    author="Conduit Healthcare",
+    author_email="admin@conduithealthcare.com",
+    license="unlicensed",
+    packages=find_packages(),
+    zip_safe=False,
+    install_requires=[
+        "confluent-kafka==1.9.2",
+        "sqlalchemy==2.0.16",
+        "mysql-connector-python==8.0.33",
+        "strawberry-graphql[cli]==0.215.1",
+        "python-jose[cryptography]==3.3.0",
+        "auth0-python==4.2.0",
+        "pydantic==1.10.9",
+        "redis[hiredis]==4.5.5",
+        "conduit-auth==0.4.1",
+        "motor==3.1.1",
+        "cryptography==41.0.6",
+        "pytest==7.3.2",
+        "pytest-cov==4.1.0",
+        "boto3==1.28.52",
+        "newrelic==9.1.0",
+        "fastapi==0.92.0",
+    ],
+)

@@ -1,0 +1,20 @@
+--index-url https://19xcho-UC1iMrTOnh79IEu8Y7FCseFCY@repo.fury.io/conduithealthcare/
+--extra-index-url https://pypi.org/simple/
+conduit-auth==0.4.1
+confluent-kafka==1.9.2
+certifi==2023.7.22
+pytest==7.3.2
+pytest-cov==4.1.0
+pre-commit==2.21.0
+sqlalchemy==2.0.16
+mysql-connector-python==8.0.33
+strawberry-graphql[cli]==0.215.1
+python-jose[cryptography]==3.3.0
+pydantic==1.10.9
+auth0-python==4.2.0
+redis[hiredis]==4.5.5
+motor==3.1.1
+cryptography==41.0.6
+boto3==1.28.52
+newrelic==9.1.0
+fastapi==0.92.0

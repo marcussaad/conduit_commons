@@ -1,0 +1,33 @@
+name: Continuous Deploy
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  cd:
+    name: "Publish new package to Gemfury"
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Build Package
+        run: python setup.py sdist
+      - name: Install GemFury cli
+        run: |
+          wget https://github.com/gemfury/cli/releases/download/v0.20.1/fury_0.20.1_Linux_64bit.tar.gz
+          tar -xzf fury_0.20.1_Linux_64bit.tar.gz
+          chmod +x fury
+      - name: Get Package Name
+        run: |
+          echo "package_name=$(ls -Art dist/ | tail -n 1)" >> $GITHUB_ENV
+      - name: Publish to Gemfury
+        run: |
+          ./fury push dist/${{ env.package_name }} --account ${{ secrets.GEMFURY_ACCOUNT }} --api-token ${{ secrets.GEMFURY_TOKEN }}
+
